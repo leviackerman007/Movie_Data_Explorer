@@ -72,8 +72,8 @@ Clone the repository and install dependencies:
 
 ```bash
 
-git clone https://github.com/your-username/movie-analysis.git
-cd movie-analysis
+git clone https://github.com/leviackerman007/Movie_Data_Explorer.git
+cd Movie_Data_Explorer
 pip install -r requirements.txt
 jupyter notebook
 
