@@ -34,7 +34,6 @@ This analysis answers **15 key questions**, revealing interesting movie industry
 1️⃣4️⃣ **Which genre had the highest number of movie releases?**  
 1️⃣5️⃣ **Top 20 production companies with the highest number of releases?**  
 1️⃣6️⃣ **Life time profit earn by each production company?**
-
 1️⃣7️⃣ **Top 20 director who directs maximum movies?**
 
 ---
