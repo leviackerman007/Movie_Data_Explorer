@@ -16,7 +16,7 @@ This project explores **The Movie Database (TMDb) dataset**, containing details 
 ---
 
 ## ❓ Key Questions Explored  
-This analysis answers **15 key questions**, revealing interesting movie industry trends:  
+This analysis answers **17 key questions**, revealing interesting movie industry trends:  
 
 1️⃣ **Which year had the highest number of movie releases?**  
 2️⃣ **Which movie had the highest and lowest profit?**  
@@ -33,8 +33,9 @@ This analysis answers **15 key questions**, revealing interesting movie industry
 1️⃣3️⃣ **Which month generated the highest average revenue?**  
 1️⃣4️⃣ **Which genre had the highest number of movie releases?**  
 1️⃣5️⃣ **Top 20 production companies with the highest number of releases?**  
-1️⃣6️⃣ **Life time profit earn by each production company?**
-1️⃣7️⃣ **Top 20 director who directs maximum movies?**
+1️⃣6️⃣ **Lifetime profit earned by each production company?**  
+1️⃣7️⃣ **Top 20 directors who directed the maximum number of movies?**
+
 
 ---
 
