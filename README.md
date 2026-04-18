@@ -7,10 +7,8 @@
 An end-to-end analytics project that evolves notebook EDA into an interactive, deployment-ready Streamlit product.
 
 ## Live Links
-- Public deployed app: https://moviedataexplorer-3bkxp7capsll26c72w4duu.streamlit.app/
-- Local app (currently available): http://localhost:8501
-
-Open the public app directly: [TMDb Movie Intelligence Dashboard](https://moviedataexplorer-3bkxp7capsll26c72w4duu.streamlit.app/)
+- Live App: [TMDb Movie Intelligence Dashboard](https://moviedataexplorer-3bkxp7capsll26c72w4duu.streamlit.app/)
+- GitHub Repository: [Movie_Data_Explorer](https://github.com/leviackerman007/Movie_Data_Explorer)
 
 ## Why This Is Resume-Ready
 - Converts analysis work into a user-facing data product.
@@ -51,7 +49,7 @@ These visuals come from the analysis workflow and are now extended with interact
 - [app.py](app.py) is the productionized interactive dashboard built from those notebook insights.
 - Keeping both is recommended for portfolio quality: it shows analytical depth and product execution.
 
-If you want to run the notebook:
+To run the notebook locally:
 ```bash
 jupyter notebook Movie_Analysis.ipynb
 ```
@@ -93,21 +91,17 @@ Theme note:
 
 ## Deploy To Streamlit Community Cloud
 1. Push your latest code to GitHub.
-2. Open Streamlit Community Cloud.
-3. Click New app and select your repository and branch.
+2. Open Streamlit Community Cloud and create a new app.
+3. Select your repository and branch.
 4. Set Main file path to `app.py`.
-5. Deploy and copy the generated URL.
-6. Update the Public deployed app link above.
+5. Deploy.
 
-## Suggested Resume Bullets
-- Built and deployed an interactive Streamlit dashboard over 10K+ TMDb records with dynamic filters, KPI cards, and downloadable drill-down views.
-- Engineered a reusable analytics pipeline (cleaning, feature engineering, trend analysis, and forecasting) to convert notebook EDA into a production-style application.
-- Designed business-focused Plotly visualizations for profitability, release trends, and talent ecosystem analysis to improve executive readability.
+Status: This project is already deployed at [TMDb Movie Intelligence Dashboard](https://moviedataexplorer-3bkxp7capsll26c72w4duu.streamlit.app/).
 
 ## Future Enhancements
-- Add scenario planning bands (best/base/worst) for revenue projection.
-- Add model-based forecasting and backtesting metrics.
-- Add CI checks and lightweight data quality tests.
+- Add scenario planning bands (best/base/worst) for revenue projections.
+- Add model-based forecasting with backtesting metrics.
+- Add CI checks and lightweight data quality validation.
 
 ## Contact
 - Email: [pandeytushart522@gmail.com](mailto:pandeytushart522@gmail.com)
