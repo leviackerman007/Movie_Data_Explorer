@@ -7,10 +7,10 @@
 An end-to-end analytics project that evolves notebook EDA into an interactive, deployment-ready Streamlit product.
 
 ## Live Links
-- Public deployed app: https://YOUR-APP-NAME.streamlit.app
+- Public deployed app: https://moviedataexplorer-3bkxp7capsll26c72w4duu.streamlit.app/
 - Local app (currently available): http://localhost:8501
 
-Tip: replace `YOUR-APP-NAME` with your Streamlit Community Cloud app URL after deployment.
+Open the public app directly: [TMDb Movie Intelligence Dashboard](https://moviedataexplorer-3bkxp7capsll26c72w4duu.streamlit.app/)
 
 ## Why This Is Resume-Ready
 - Converts analysis work into a user-facing data product.
@@ -38,6 +38,13 @@ The original notebook is in [Movie_Analysis.ipynb](Movie_Analysis.ipynb), and th
 4. feature correlation matrix
 5. top genres, directors, and production companies
 - Explorer table with CSV export of filtered data
+
+## Dashboard Preview
+| Release Trend Analysis | Budget vs Profit Relationship |
+|---|---|
+| ![Release Trends](images/release_per_year.png) | ![Profit vs Budget](images/profit_vs_budget.png) |
+
+These visuals come from the analysis workflow and are now extended with interactive exploration in the deployed Streamlit app.
 
 ## Notebook (EDA) and App Relationship
 - [Movie_Analysis.ipynb](Movie_Analysis.ipynb) is the research notebook where the original EDA and hypothesis testing were performed.
