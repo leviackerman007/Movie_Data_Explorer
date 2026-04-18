@@ -44,6 +44,13 @@ The original notebook is in [Movie_Analysis.ipynb](Movie_Analysis.ipynb), and th
 
 These visuals come from the analysis workflow and are now extended with interactive exploration in the deployed Streamlit app.
 
+## Key Insights
+- Release activity accelerates in later years, showing a clear growth trend in annual movie output.
+- Budget and revenue show a strong positive relationship, with higher-budget films generally achieving higher box office returns.
+- Profitability is highly skewed: a small group of blockbuster titles contributes a disproportionate share of total profit.
+- Genre mix matters: recurring high-volume genres (such as drama, comedy, and action) dominate release counts across years.
+- Monthly release timing is uneven, with certain months consistently producing higher release volume and stronger average revenue.
+
 ## Notebook (EDA) and App Relationship
 - [Movie_Analysis.ipynb](Movie_Analysis.ipynb) is the research notebook where the original EDA and hypothesis testing were performed.
 - [app.py](app.py) is the productionized interactive dashboard built from those notebook insights.
