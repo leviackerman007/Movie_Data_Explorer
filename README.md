@@ -1,101 +1,108 @@
-# 🎬 TMDb Movie Dataset Analysis  
+# TMDb Movie Intelligence Dashboard
 
-![Movie Analysis](https://img.shields.io/badge/Data%20Analysis-TMDb%20Movies-blueviolet?style=for-the-badge)  
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active-0f766e)
 
-## 📌 Project Overview  
-This project explores **The Movie Database (TMDb) dataset**, containing details on **10,866 movies across 21 features**, including user ratings, revenue, genres, and more. The goal is to perform **Exploratory Data Analysis (EDA)** to uncover insights, trends, and patterns in the movie industry.  
+An end-to-end analytics project that evolves notebook EDA into an interactive, deployment-ready Streamlit product.
 
----
+## Live Links
+- Public deployed app: https://YOUR-APP-NAME.streamlit.app
+- Local app (currently available): http://localhost:8501
 
-## 🗂️ Dataset Overview  
-📂 **Dataset:** TMDb Movie Dataset  
-📊 **Total Movies:** 10,866  
-📌 **Total Features:** 21  
-⚠️ **Note:** Some columns contain missing values and were cleaned before analysis.  
+Tip: replace `YOUR-APP-NAME` with your Streamlit Community Cloud app URL after deployment.
 
----
+## Why This Is Resume-Ready
+- Converts analysis work into a user-facing data product.
+- Includes data cleaning, feature engineering, and business-focused storytelling.
+- Uses interactive filters and downloadable outputs for practical decision support.
 
-## ❓ Key Questions Explored  
-This analysis answers **17 key questions**, revealing interesting movie industry trends:  
+## Project Scope
+This project analyzes the TMDb movies dataset (10K+ records) to uncover patterns in:
+- release trends over time
+- budget, revenue, and profitability behavior
+- genre, director, and production-company contribution
+- audience response through ratings and popularity
 
-1️⃣ **Which year had the highest number of movie releases?**  
-2️⃣ **Which movie had the highest and lowest profit?**  
-3️⃣ **Top 10 highest-grossing movies?**  
-4️⃣ **Movies with the highest and lowest budgets?**  
-5️⃣ **Which movies made the highest and lowest revenue?**  
-6️⃣ **Which movies had the shortest and longest runtimes?**  
-7️⃣ **Which movies received the highest and lowest ratings?**  
-8️⃣ **Which year had the highest profit rate?**  
-9️⃣ **Which movie runtimes were most liked by audiences based on popularity?**  
-🔟 **What is the average movie runtime over the years?**  
-1️⃣1️⃣ **How do revenue and popularity correlate with budget and runtime?**  
-1️⃣2️⃣ **Which month had the highest number of movie releases?**  
-1️⃣3️⃣ **Which month generated the highest average revenue?**  
-1️⃣4️⃣ **Which genre had the highest number of movie releases?**  
-1️⃣5️⃣ **Top 20 production companies with the highest number of releases?**  
-1️⃣6️⃣ **Lifetime profit earned by each production company?**  
-1️⃣7️⃣ **Top 20 directors who directed the maximum number of movies?**
+The original notebook is in [Movie_Analysis.ipynb](Movie_Analysis.ipynb), and the productionized app is in [app.py](app.py).
 
+## Dashboard Highlights
+- Sidebar filters by release-year range and genre
+- KPI cards for movies, average rating, total revenue, and median profit
+- Executive summary tab with business notes
+- Revenue projection view (3/5/7 years)
+- Interactive visuals:
+1. releases by year and month
+2. budget vs revenue scatter
+3. top profitable movies
+4. feature correlation matrix
+5. top genres, directors, and production companies
+- Explorer table with CSV export of filtered data
 
----
+## Notebook (EDA) and App Relationship
+- [Movie_Analysis.ipynb](Movie_Analysis.ipynb) is the research notebook where the original EDA and hypothesis testing were performed.
+- [app.py](app.py) is the productionized interactive dashboard built from those notebook insights.
+- Keeping both is recommended for portfolio quality: it shows analytical depth and product execution.
 
-## 📊 Data Processing & Cleaning  
-- **Handled missing values** to ensure data consistency  
-- **Dropped irrelevant columns** that didn’t contribute to the analysis  
-- **Feature Engineering**: Created new insights such as **profit calculation**  
-- **Data Transformation**: Converted timestamps, formatted categorical values  
-
----
-
-## 📈 Visualizations & Insights  
-The project utilizes **Matplotlib & Seaborn** for data visualization.  
-
-<p align="center">
-  <img src="images/release_per_year.png" width="450" alt="Movies Released Per Year">
-  <img src="images/profit_vs_budget.png" width="450" alt="Profit vs Budget">
-</p>  
-
-### ✨ Key Insights:  
-🎥 **2014 had the highest number of movie releases.**  
-💰 **Revenue is directly connected to the budget.**  
-📊 **Movies with higher budgets have shown a corresponding increase in the revenues.**  
-
----
-
-## 🛠️ Technologies Used  
-🔹 **Python** 🐍  
-🔹 **Pandas, NumPy** for data handling  
-🔹 **Matplotlib, Seaborn** for data visualization  
-🔹 **Jupyter Notebook** for interactive analysis  
-
----
-
-## 🚀 How to Run  
-Clone the repository and install dependencies:  
-
+If you want to run the notebook:
 ```bash
+jupyter notebook Movie_Analysis.ipynb
+```
 
+## Tech Stack
+| Area | Tools |
+|---|---|
+| Language | Python |
+| Data | Pandas |
+| Visualization | Plotly |
+| App Framework | Streamlit |
+
+## Project Structure
+```text
+Movie_Data_Explorer/
+|-- app.py
+|-- Movie_Analysis.ipynb
+|-- README.md
+|-- requirements.txt
+|-- .streamlit/
+|   `-- config.toml
+|-- Dataset/
+|   `-- tmdb_movies_data.csv
+`-- images/
+```
+
+## Run Locally
+```bash
 git clone https://github.com/leviackerman007/Movie_Data_Explorer.git
 cd Movie_Data_Explorer
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-jupyter notebook
-
+streamlit run app.py
 ```
-Open `Movie_Analysis.ipynb` and execute the cells to explore the dataset.  
 
----
+Theme note:
+- The app now follows Streamlit's user-selectable theme behavior, so reviewers can use Light or Dark mode from app settings.
 
-## 🔮 Future Improvements  
-✅ Extend analysis with **sentiment analysis on reviews**  
-✅ Integrate **machine learning for revenue prediction**  
-✅ Improve **interactive visualizations with Plotly**  
+## Deploy To Streamlit Community Cloud
+1. Push your latest code to GitHub.
+2. Open Streamlit Community Cloud.
+3. Click New app and select your repository and branch.
+4. Set Main file path to `app.py`.
+5. Deploy and copy the generated URL.
+6. Update the Public deployed app link above.
 
----
+## Suggested Resume Bullets
+- Built and deployed an interactive Streamlit dashboard over 10K+ TMDb records with dynamic filters, KPI cards, and downloadable drill-down views.
+- Engineered a reusable analytics pipeline (cleaning, feature engineering, trend analysis, and forecasting) to convert notebook EDA into a production-style application.
+- Designed business-focused Plotly visualizations for profitability, release trends, and talent ecosystem analysis to improve executive readability.
 
-## 📌 Conclusion  
-This project provides valuable insights into **movie trends, profitability, and audience preferences**. The results can help **producers, studios, and analysts** understand key factors contributing to successful movies.  
+## Future Enhancements
+- Add scenario planning bands (best/base/worst) for revenue projection.
+- Add model-based forecasting and backtesting metrics.
+- Add CI checks and lightweight data quality tests.
 
-⭐ If you found this useful, **consider giving this repo a star!**  
-
-📬 **Contact:** [pandeytushart522@gmail.com](mailto:pandeytushart522@gmail.com) | [LinkedIn](https://linkedin.com/in/tushar-pandey-ab94a418a)  
+## Contact
+- Email: [pandeytushart522@gmail.com](mailto:pandeytushart522@gmail.com)
+- LinkedIn: [linkedin.com/in/tushar-pandey-ab94a418a](https://linkedin.com/in/tushar-pandey-ab94a418a)
 
