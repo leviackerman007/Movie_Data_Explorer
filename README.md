@@ -10,11 +10,6 @@ An end-to-end analytics project that evolves notebook EDA into an interactive, d
 - Live App: [TMDb Movie Intelligence Dashboard](https://moviedataexplorer-3bkxp7capsll26c72w4duu.streamlit.app/)
 - GitHub Repository: [Movie_Data_Explorer](https://github.com/leviackerman007/Movie_Data_Explorer)
 
-## Why This Is Resume-Ready
-- Converts analysis work into a user-facing data product.
-- Includes data cleaning, feature engineering, and business-focused storytelling.
-- Uses interactive filters and downloadable outputs for practical decision support.
-
 ## Project Scope
 This project analyzes the TMDb movies dataset (10K+ records) to uncover patterns in:
 - release trends over time
@@ -95,15 +90,6 @@ streamlit run app.py
 
 Theme note:
 - The app now follows Streamlit's user-selectable theme behavior, so reviewers can use Light or Dark mode from app settings.
-
-## Deploy To Streamlit Community Cloud
-1. Push your latest code to GitHub.
-2. Open Streamlit Community Cloud and create a new app.
-3. Select your repository and branch.
-4. Set Main file path to `app.py`.
-5. Deploy.
-
-Status: This project is already deployed at [TMDb Movie Intelligence Dashboard](https://moviedataexplorer-3bkxp7capsll26c72w4duu.streamlit.app/).
 
 ## Future Enhancements
 - Add scenario planning bands (best/base/worst) for revenue projections.
