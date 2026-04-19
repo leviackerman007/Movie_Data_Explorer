@@ -24,6 +24,7 @@ The original notebook is in [Movie_Analysis.ipynb](Movie_Analysis.ipynb), and th
 - KPI cards for movies, average rating, total revenue, and median profit
 - Executive summary tab with business notes
 - Revenue projection view (3/5/7 years)
+- Data quality tab with missing-value checks, invalid financial-row counts, and outlier diagnostics
 - Interactive visuals:
 1. releases by year and month
 2. budget vs revenue scatter
@@ -67,10 +68,15 @@ jupyter notebook Movie_Analysis.ipynb
 ## Project Structure
 ```text
 Movie_Data_Explorer/
+|-- .github/
+|   `-- workflows/
+|       `-- ci.yml
 |-- app.py
 |-- Movie_Analysis.ipynb
 |-- README.md
 |-- requirements.txt
+|-- tests/
+|   `-- test_app.py
 |-- .streamlit/
 |   `-- config.toml
 |-- Dataset/
@@ -91,10 +97,21 @@ streamlit run app.py
 Theme note:
 - The app follows Streamlit's user-selectable theme behavior, so reviewers can use Light or Dark mode from app settings.
 
+## Testing
+Run tests locally:
+
+```bash
+python -m pip install -r requirements.txt
+pytest -q
+```
+
+CI note:
+- GitHub Actions runs tests automatically on push and pull requests to `main`.
+
 ## Future Enhancements
 - Add scenario planning bands (best/base/worst) for revenue projections.
 - Add model-based forecasting with backtesting metrics.
-- Add CI checks and lightweight data quality validation.
+- Add trend alerts (e.g., sudden revenue drop/rise) based on selected filters.
 
 ## Contact
 - Email: [pandeytushart522@gmail.com](mailto:pandeytushart522@gmail.com)

@@ -80,11 +80,70 @@ def filter_dataset(df: pd.DataFrame, year_range: tuple[int, int], selected_genre
     filtered = df[df["release_year"].between(year_range[0], year_range[1])].copy()
 
     if selected_genres:
-        genre_pattern = "|".join(selected_genres)
-        mask = filtered["genres"].fillna("").str.contains(genre_pattern, case=False, regex=True)
+        selected_set = {genre.strip().lower() for genre in selected_genres if genre.strip()}
+        tokenized_genres = filtered["genres"].fillna("").str.lower().str.split("|")
+        mask = tokenized_genres.apply(lambda tokens: any(token.strip() in selected_set for token in tokens))
         filtered = filtered[mask]
 
     return filtered
+
+
+def _iqr_outlier_count(series: pd.Series) -> int:
+    values = pd.to_numeric(series, errors="coerce").dropna()
+    if len(values) < 4:
+        return 0
+
+    q1 = values.quantile(0.25)
+    q3 = values.quantile(0.75)
+    iqr = q3 - q1
+    if pd.isna(iqr) or iqr == 0:
+        return 0
+
+    lower = q1 - (1.5 * iqr)
+    upper = q3 + (1.5 * iqr)
+    return int(((values < lower) | (values > upper)).sum())
+
+
+def compute_data_quality_summary(df: pd.DataFrame) -> dict[str, object]:
+    total_rows = int(len(df))
+    total_cols = int(len(df.columns))
+    duplicate_rows = int(df.duplicated().sum())
+
+    total_cells = total_rows * total_cols
+    missing_cells = int(df.isna().sum().sum())
+    missing_pct = 0.0 if total_cells == 0 else (missing_cells / total_cells) * 100
+
+    missing_table = (
+        df.isna()
+        .sum()
+        .reset_index(name="missing_count")
+        .rename(columns={"index": "column"})
+        .sort_values("missing_count", ascending=False)
+    )
+    if total_rows > 0:
+        missing_table["missing_pct"] = (missing_table["missing_count"] / total_rows * 100).round(2)
+    else:
+        missing_table["missing_pct"] = 0.0
+
+    invalid_dates = int(df["release_date"].isna().sum()) if "release_date" in df.columns else 0
+    invalid_financial = 0
+    if "budget" in df.columns and "revenue" in df.columns:
+        invalid_financial = int(((df["budget"] <= 0) | (df["revenue"] <= 0)).sum())
+
+    revenue_outliers = _iqr_outlier_count(df["revenue"]) if "revenue" in df.columns else 0
+    profit_outliers = _iqr_outlier_count(df["profit"]) if "profit" in df.columns else 0
+
+    return {
+        "total_rows": total_rows,
+        "duplicate_rows": duplicate_rows,
+        "missing_cells": missing_cells,
+        "missing_pct": missing_pct,
+        "invalid_dates": invalid_dates,
+        "invalid_financial": invalid_financial,
+        "revenue_outliers": revenue_outliers,
+        "profit_outliers": profit_outliers,
+        "missing_table": missing_table,
+    }
 
 
 def render_header(df: pd.DataFrame) -> None:
@@ -322,6 +381,57 @@ def render_explorer_tab(df: pd.DataFrame) -> None:
     )
 
 
+def render_data_quality_tab(df: pd.DataFrame) -> None:
+    st.subheader("Data Quality")
+
+    quality = compute_data_quality_summary(df)
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Rows", f"{quality['total_rows']:,}")
+    col2.metric("Duplicate Rows", f"{quality['duplicate_rows']:,}")
+    col3.metric("Missing Cells", f"{quality['missing_cells']:,}")
+    col4.metric("Missing %", f"{quality['missing_pct']:.2f}%")
+
+    left, right = st.columns(2)
+
+    missing_table = quality["missing_table"]
+    missing_non_zero = missing_table[missing_table["missing_count"] > 0].head(12)
+    if not missing_non_zero.empty:
+        fig_missing = px.bar(
+            missing_non_zero.sort_values("missing_count"),
+            x="missing_count",
+            y="column",
+            orientation="h",
+            title="Top Columns by Missing Values",
+            labels={"missing_count": "Missing Values", "column": "Column"},
+            color="missing_pct",
+            color_continuous_scale="Oranges",
+        )
+        fig_missing.update_layout(height=420, coloraxis_showscale=False)
+        left.plotly_chart(fig_missing, use_container_width=True)
+    else:
+        left.info("No missing values in the current filtered dataset.")
+
+    quality_flags = pd.DataFrame(
+        {
+            "check": [
+                "Invalid release dates",
+                "Rows with budget <= 0 or revenue <= 0",
+                "Revenue outliers (IQR rule)",
+                "Profit outliers (IQR rule)",
+            ],
+            "count": [
+                quality["invalid_dates"],
+                quality["invalid_financial"],
+                quality["revenue_outliers"],
+                quality["profit_outliers"],
+            ],
+        }
+    )
+    right.dataframe(quality_flags, use_container_width=True, hide_index=True)
+
+    st.caption("These checks are based on the currently filtered records, not the full raw dataset.")
+
+
 def _linear_projection(years: list[int], values: list[float], horizon: int) -> pd.DataFrame:
     """Create a simple linear projection using closed-form slope/intercept."""
     if len(years) < 2:
@@ -445,7 +555,7 @@ def main() -> None:
 
     render_kpis(filtered_df)
 
-    tabs = st.tabs(["Executive Summary", "Overview", "Financial Insights", "Talent & Production", "Explorer"])
+    tabs = st.tabs(["Executive Summary", "Overview", "Financial Insights", "Talent & Production", "Explorer", "Data Quality"])
 
     with tabs[0]:
         render_executive_tab(filtered_df, forecast_horizon=forecast_horizon)
@@ -457,6 +567,8 @@ def main() -> None:
         render_talent_tab(filtered_df, top_n=top_n)
     with tabs[4]:
         render_explorer_tab(filtered_df)
+    with tabs[5]:
+        render_data_quality_tab(filtered_df)
 
 
 if __name__ == "__main__":
