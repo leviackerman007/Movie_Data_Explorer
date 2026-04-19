@@ -62,6 +62,20 @@ def format_large_number(value: float) -> str:
     return f"${value:,.0f}"
 
 
+def format_compact_currency(value: float) -> str:
+    if pd.isna(value):
+        return "N/A"
+
+    abs_value = abs(value)
+    if abs_value >= 1_000_000_000:
+        return f"${value / 1_000_000_000:.2f}B"
+    if abs_value >= 1_000_000:
+        return f"${value / 1_000_000:.2f}M"
+    if abs_value >= 1_000:
+        return f"${value / 1_000:.2f}K"
+    return f"${value:,.0f}"
+
+
 def filter_dataset(df: pd.DataFrame, year_range: tuple[int, int], selected_genres: list[str]) -> pd.DataFrame:
     filtered = df[df["release_year"].between(year_range[0], year_range[1])].copy()
 
@@ -116,10 +130,11 @@ def render_kpis(df: pd.DataFrame) -> None:
 
     valid_profit = df.loc[(df["budget"] > 0) & (df["revenue"] > 0), "profit"]
     median_profit_value = valid_profit.median() if not valid_profit.empty else float("nan")
+    total_revenue_value = df["revenue"].sum()
 
     col1.metric("Movies", f"{len(df):,}")
     col2.metric("Avg Rating", f"{df['vote_average'].mean():.2f}")
-    col3.metric("Total Revenue", format_large_number(df["revenue"].sum()))
+    col3.metric("Total Revenue", format_compact_currency(total_revenue_value), help=f"Exact value: {format_large_number(total_revenue_value)}")
     col4.metric("Median Profit", format_large_number(median_profit_value))
 
 
@@ -390,6 +405,9 @@ def render_executive_tab(df: pd.DataFrame, forecast_horizon: int) -> None:
     )
     fig_projection.update_layout(height=440)
     st.plotly_chart(fig_projection, use_container_width=True)
+
+
+
 
 
 def main() -> None:

@@ -89,7 +89,7 @@ streamlit run app.py
 ```
 
 Theme note:
-- The app now follows Streamlit's user-selectable theme behavior, so reviewers can use Light or Dark mode from app settings.
+- The app follows Streamlit's user-selectable theme behavior, so reviewers can use Light or Dark mode from app settings.
 
 ## Future Enhancements
 - Add scenario planning bands (best/base/worst) for revenue projections.
